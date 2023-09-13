@@ -119,9 +119,12 @@ public class JARSourceHTTP extends JARSource {
 
             String proxyUser = System.getProperty(JMeter.HTTP_PROXY_USER, org.apache.jmeter.util.JMeterUtils.getProperty(JMeter.HTTP_PROXY_USER));
             if (proxyUser != null) {
+                proxyUser = URLEncoder.encode(proxyUser);
                 log.info("Using authenticated proxy with username: " + proxyUser);
                 String proxyPass = System.getProperty(JMeter.HTTP_PROXY_PASS, JMeterUtils.getProperty(JMeter.HTTP_PROXY_PASS));
-
+                if (proxyPass != null) {
+                    proxyPass = URLEncoder.encode(proxyPass);
+                }
                 String localHost;
                 try {
                     localHost = InetAddress.getLocalHost().getCanonicalHostName();
